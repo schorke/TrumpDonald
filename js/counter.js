@@ -4,7 +4,7 @@ TRUMP.counter =(function(){
 
   function requestSend(){
     $.ajax({
-      url: window.location.protocol+"//trumpdonald.org/counter.json"
+      url: "counter.json"
     })
       .then(function(data) {
         requestCallback(data);

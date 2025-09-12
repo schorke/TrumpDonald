@@ -56,7 +56,7 @@ TRUMP.hair = (function() {
           }
         }
       }
-      hairImgPool[iCr].src = 'http://d2xgoeeq7a4bfy.cloudfront.net/v1/hair'+imgRes+'/angle_'+((iCr<9)?'0':'')+(iCr+1)+'.png';
+      hairImgPool[iCr].src = 'assets/hair'+imgRes+'/angle_'+((iCr<9)?'0':'')+(iCr+1)+'.png';
     }
   }
 

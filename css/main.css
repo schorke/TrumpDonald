@@ -35,8 +35,8 @@ body{
   transform: translate(-50%, -50%);
   position: fixed;
   background-color: #1a1a2a;
-  -webkit-background-image: radial-gradient(circle, transparent 0%, #0a0b13 100%), url(http://d2xgoeeq7a4bfy.cloudfront.net/v1/noise-160.png);
-  background-image: radial-gradient(circle, transparent 0%, #0a0b13 75%), url(http://d2xgoeeq7a4bfy.cloudfront.net/v1/noise-160.png);
+  -webkit-background-image: radial-gradient(circle, transparent 0%, #0a0b13 100%), url(../assets/noise-160.png);
+  background-image: radial-gradient(circle, transparent 0%, #0a0b13 75%), url(../assets/noise-160.png);
   background-repeat: repeat;
   -webkit-background-size: auto;
   background-size: auto;
@@ -185,7 +185,7 @@ body{
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
-  background-image: url(http://d2xgoeeq7a4bfy.cloudfront.net/v1/img-0.75/trumps.png);
+  background-image: url(../assets/img-0.75/trumps.png);
   background-repeat: no-repeat;
   -webkit-background-size: contain;
   background-size: 100% 100%;
@@ -222,7 +222,7 @@ body{
   left: 50%;
   margin-top: -45px;
   margin-left: -45px;
-  background-image: url(http://d2xgoeeq7a4bfy.cloudfront.net/v1/img-0.75/eye.png);
+  background-image: url(../assets/img-0.75/eye.png);
   background-repeat: no-repeat;
   -webkit-background-size: contain;
   background-size: contain;
@@ -236,7 +236,7 @@ body{
   position: absolute;
   top: 65%;
   left: 50%;
-  background-image: url(http://d2xgoeeq7a4bfy.cloudfront.net/v1/img-0.75/reflection.png);
+  background-image: url(../assets/img-0.75/reflection.png);
   background-repeat: no-repeat;
   -webkit-background-size: contain;
   background-size: contain;
@@ -332,11 +332,11 @@ body{
 }
 
 .facebook{
-  background-image: url(http://d2xgoeeq7a4bfy.cloudfront.net/v1/facebook.png);
+  background-image: url(../assets/facebook.png);
 }
 
 .twitter{
-  background-image: url(http://d2xgoeeq7a4bfy.cloudfront.net/v1/twitter.png);
+  background-image: url(../assets/twitter.png);
 }
 
 .instagram{
