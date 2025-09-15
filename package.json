@@ -1,0 +1,20 @@
+{
+  "name": "trumpdonald-app",
+  "version": "1.0.0",
+  "description": "Why Donald Trump when you can Trump Donald? Interactive web experience.",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "start": "vercel dev"
+  },
+  "keywords": ["trump", "interactive", "web", "javascript", "canvas"],
+  "author": "Animal & MDSOjke",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+}
