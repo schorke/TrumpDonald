@@ -1,10 +1,10 @@
 
 @font-face {
   font-family: 'fat-frank';
-  src: url('../fonts/fatfrank-free.eot?#iefix') format('embedded-opentype'),
-     url('../fonts/fatfrank-free.woff') format('woff'),
-     url('../fonts/fatfrank-free.ttf') format('truetype'),
-     url('../fonts/fatfrank-free.svg#FontName') format('svg');
+  src: url('../fonts/FatFrank-Free.eot?#iefix') format('embedded-opentype'),
+     url('../fonts/FatFrank-Free.woff') format('woff'),
+     url('../fonts/FatFrank-Free.ttf') format('truetype'),
+     url('../fonts/FatFrank-Free.svg#FontName') format('svg');
   font-style: normal;
   font-weight: normal;
 }
