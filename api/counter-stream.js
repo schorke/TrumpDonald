@@ -1,7 +1,23 @@
-import { kv } from '@vercel/kv';
+import { createClient } from 'redis';
 
 const COUNTER_KEY = 'trump_counter';
-const STREAM_KEY = 'trump_counter_stream';
+
+let redis = null;
+
+async function getRedisClient() {
+  if (!redis) {
+    redis = createClient({
+      url: process.env.REDIS_URL
+    });
+    
+    redis.on('error', (err) => {
+      console.error('Redis Client Error', err);
+    });
+    
+    await redis.connect();
+  }
+  return redis;
+}
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -18,11 +34,15 @@ export default async function handler(req, res) {
   }
 
   try {
+    const client = await getRedisClient();
+    
     // Just return the current counter value as JSON
-    let counter = await kv.get(COUNTER_KEY);
+    let counter = await client.get(COUNTER_KEY);
     if (counter === null) {
       counter = 233006980;
-      await kv.set(COUNTER_KEY, counter);
+      await client.set(COUNTER_KEY, counter);
+    } else {
+      counter = parseInt(counter, 10);
     }
     
     return res.status(200).json({ counter, type: 'current' });

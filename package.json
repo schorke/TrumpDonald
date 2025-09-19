@@ -15,7 +15,7 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "@vercel/kv": "^1.0.0"
+    "redis": "^4.6.0"
   },
   "devDependencies": {
     "vercel": "^32.0.0"
