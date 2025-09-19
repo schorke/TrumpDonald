@@ -1,57 +1,27 @@
 TRUMP.counter = (function(){
   var countNumber = 0,
-      requestCount = 0,
-      eventSource = null,
-      isConnected = false;
+      requestCount = 0;
 
-  function initializeStream() {
-    if (eventSource) {
-      eventSource.close();
-    }
+  function initializePolling() {
+    // Get initial counter value
+    requestSend();
     
-    try {
-      eventSource = new EventSource('/api/counter-stream');
-      
-      eventSource.onopen = function() {
-        isConnected = true;
-        console.log('Counter stream connected');
-      };
-      
-      eventSource.onmessage = function(event) {
-        try {
-          const data = JSON.parse(event.data);
-          if (data.counter !== undefined) {
+    // Set up regular polling for updates
+    setInterval(function() {
+      $.ajax({
+        url: "/api/counter-stream",
+        method: "GET"
+      })
+        .then(function(data) {
+          if (data.counter !== undefined && data.counter !== countNumber) {
             countNumber = data.counter;
             setNumber();
-            
-            // Show counter on initial load
-            if (data.type === 'initial') {
-              TweenMax.to([$(".counter-cont .counter-numbers"), $(".counter-cont .counter-text")], 0.5, {opacity:1});
-            }
           }
-        } catch (error) {
-          console.error('Error parsing stream data:', error);
-        }
-      };
-      
-      eventSource.onerror = function(error) {
-        console.error('Counter stream error:', error);
-        isConnected = false;
-        
-        // Fallback to polling if stream fails
-        setTimeout(function() {
-          if (!isConnected) {
-            console.log('Falling back to polling');
-            requestSend();
-          }
-        }, 5000);
-      };
-      
-    } catch (error) {
-      console.error('Failed to initialize stream:', error);
-      // Fallback to polling
-      requestSend();
-    }
+        })
+        .fail(function(error) {
+          console.error('Polling error:', error);
+        });
+    }, 3000); // Poll every 3 seconds
   }
 
   function requestSend(){
@@ -104,7 +74,7 @@ TRUMP.counter = (function(){
           setNumber();
         }
       })
-      .catch(function(error) {
+      .fail(function(error) {
         console.error('Failed to increment counter:', error);
         // Revert optimistic update on error
         countNumber--;
@@ -114,19 +84,12 @@ TRUMP.counter = (function(){
   
   function updateNumberTimeout() {
     setTimeout(function(){
-      if (!isConnected) {
-        requestSend();
-      }
+      requestSend();
     }, 60000)
   }
 
-  // Initialize with stream, fallback to polling
-  if (typeof EventSource !== 'undefined') {
-    initializeStream();
-  } else {
-    console.log('EventSource not supported, using polling');
-    requestSend();
-  }
+  // Initialize with polling
+  initializePolling();
   
   return{
     uNC: updateNumberClick
