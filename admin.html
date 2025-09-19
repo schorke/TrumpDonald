@@ -102,36 +102,37 @@
         <div class="section auth-section">
             <h2>🔐 Authentication</h2>
             <input type="password" id="adminSecret" placeholder="Enter your admin secret key">
-            <button onclick="saveSecret()">Save Secret</button>
+            <button type="button" onclick="saveSecret()">Save Secret</button>
             <div id="authResult"></div>
         </div>
 
         <div class="section">
             <h2>📊 Current Counter Value</h2>
             <div class="current-value" id="currentValue">Loading...</div>
-            <button onclick="getCurrentValue()">Refresh</button>
+            <button type="button" onclick="getCurrentValue()">Refresh</button>
             <div id="getCurrentResult"></div>
         </div>
 
         <div class="section">
             <h2>✏️ Set Counter Value</h2>
             <input type="number" id="newValue" placeholder="Enter new value" min="0">
-            <button onclick="setCounterValue()">Set Value</button>
+            <button type="button" onclick="setCounterValue()">Set Value</button>
             <div id="setValueResult"></div>
         </div>
 
         <div class="section">
             <h2>🔧 Quick Actions</h2>
-            <button onclick="setQuickValue(0)">Reset to 0</button>
-            <button onclick="setQuickValue(1000000)">Set to 1M</button>
-            <button onclick="setQuickValue(233006980)">Reset to Original</button>
+            <button type="button" onclick="setQuickValue(0)">Reset to 0</button>
+            <button type="button" onclick="setQuickValue(1000000)">Set to 1M</button>
+            <button type="button" onclick="setQuickValue(233006980)">Reset to Original</button>
         </div>
     </div>
 
     <script>
+        // Ensure functions are in global scope
         let adminSecret = '';
 
-        function saveSecret() {
+        window.saveSecret = function() {
             adminSecret = document.getElementById('adminSecret').value;
             const resultDiv = document.getElementById('authResult');
             
@@ -142,7 +143,7 @@
             }
         }
 
-        async function getCurrentValue() {
+        window.getCurrentValue = async function() {
             const resultDiv = document.getElementById('getCurrentResult');
             const currentValueDiv = document.getElementById('currentValue');
             
@@ -157,12 +158,12 @@
                     throw new Error(data.error || 'Failed to get counter');
                 }
             } catch (error) {
-                resultDiv.innerHTML = `<div class="result error">❌ Error: ${error.message}</div>';
+                    resultDiv.innerHTML = `<div class="result error">❌ Error: ${error.message}</div>`;
                 currentValueDiv.textContent = 'Error loading';
             }
         }
 
-        async function setCounterValue() {
+        window.setCounterValue = async function() {
             const newValue = parseInt(document.getElementById('newValue').value);
             const resultDiv = document.getElementById('setValueResult');
             
@@ -199,13 +200,15 @@
             }
         }
 
-        function setQuickValue(value) {
+        window.setQuickValue = function(value) {
             document.getElementById('newValue').value = value;
             setCounterValue();
         }
 
         // Load current value on page load
-        getCurrentValue();
+        document.addEventListener('DOMContentLoaded', function() {
+            getCurrentValue();
+        });
     </script>
 </body>
 </html>
